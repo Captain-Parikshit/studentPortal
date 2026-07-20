@@ -5,7 +5,8 @@ import Login from "./components/auth/login";
 import Signup from "./components/auth/Signup";
 import Home from "./components/Home";
 import Jobs from "./components/Jobs";
-//4:33:50 time 
+import Browse from "./components/Browse";
+//5:56:00 time 
 const appRouter = createBrowserRouter([
   {
     path:'/',
@@ -22,6 +23,10 @@ const appRouter = createBrowserRouter([
   {
     path:'/Jobs',
     element:<Jobs/>
+  },
+  {
+    path:'/browse',
+    element:<Browse/>
   },
 ])
 
