@@ -57,7 +57,7 @@ function NavBar() {
                   <div className="flex flex-col my-2 text-gray-600">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-black">
                       <User2 size={18} />
-                      <span>View Profile</span>
+                      <span><Link to='/profile'>profile</Link></span>
                     </div>
 
                     <div className="flex items-center gap-2 cursor-pointer hover:text-black">
