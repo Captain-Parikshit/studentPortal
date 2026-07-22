@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const register = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
+  
     if (!fullname || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
         message: "something is missing",
@@ -127,7 +128,8 @@ const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
     const file = req.file;
-    
+      // console.log( fullname, email, phoneNumber, bio, skills )
+
     // cloudnary be here
     let skillsArray;
     if(skills){
@@ -151,10 +153,7 @@ const updateProfile = async (req, res) => {
     
     
     
-    user.profile.bio = bio;
-    user.profile.skills = skillsArray;
-
-    //resume cones llater here ....
+    //resume comes later here ....
 
     await user.save();
 
@@ -175,6 +174,10 @@ const updateProfile = async (req, res) => {
 
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      message: "Server Error",
+      success: false,
+    });
   }
 };
 
