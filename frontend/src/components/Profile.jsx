@@ -7,12 +7,15 @@ import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
 import UpdateProfileDialog from "./UpdateProfileDialog";
+import { useSelector } from "react-redux";
+import store from "@/redux/store";
 
-const skills = ["html", "css", "javascript", "ReactJs"];
+// const skills = ["html", "css", "javascript", "ReactJs"];
 const isResume = true;
 
 const Profile = () => {
   const [open ,setOpen] = useState(false);
+  const {user} = useSelector(store=>store.auth);
   return (
     <div>
       <NavBar />
@@ -21,15 +24,14 @@ const Profile = () => {
           <div className="flex items-center gap-4">
             <Avatar className="h-24 w-24">
               <AvatarImage
-                src="https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg"
+                src={user?.profile?.profilePhoto}
                 alt="profile"
               />
             </Avatar>
             <div>
-              <h1 className="font-medium text-xl">Full Name</h1>
+              <h1 className="font-medium text-xl">{user?.fullname}</h1>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit,
-                sunt autem. Perspiciatis.
+                {user?.profile?.bio}
               </p>
             </div>
           </div>
@@ -40,18 +42,18 @@ const Profile = () => {
         <div className="my-5">
           <div className="flex items-center gap-3 my-2">
             <Mail />
-            <span>parikshit@gmail.com</span>
+            <span>{user?.email}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
             <Contact />
-            <span>9876543210</span>
+            <span>{user?.phoneNumber}</span>
           </div>
         </div>
         <div className="my-5">
           <h1>Skills</h1>
           <div className="flex items-center gap-1">
-            {skills.lenght != 0 ? (
-              skills.map((item, index) => <Badge key={index}>{item}</Badge>)
+            {user?.profile?.skills.length != 0 ? (
+              user?.profile?.skills.map((item, index) => <Badge key={index}>{item}</Badge>)
             ) : (
               <span>NA</span>
             )}
@@ -63,10 +65,10 @@ const Profile = () => {
           {isResume ? (
             <a
               target="blank"
-              href="https://www.google.com/?zx=1784572712166"
+              href={user?.profile?.resume}
               className="text-blue-500 w-full hover:underline cursor-pointer"
             >
-              Click Me
+               {user?.profile?.resumeOriginalName}
             </a>
           ) : (
             <span>NA</span>
